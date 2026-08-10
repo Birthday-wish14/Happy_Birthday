@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
       { title: "August", album: "folklore", file: "./assets/audio/august.mp3", freq: 440.00 },
       { title: "All Too Well", album: "Red (TV)", file: "./assets/audio/all_too_well.mp3", freq: 523.25 },
       { title: "Daylight", album: "Lover", file: "./assets/audio/daylight.mp3", freq: 392.00 },
+      { title: "Lover", album: "Lover", file: "./assets/audio/lover.mp3", freq: 349.23 },
       { title: "Paper Rings", album: "Lover", file: "./assets/audio/paper_rings.mp3", freq: 698.46 },
       { title: "Enchanted", album: "Speak Now", file: "./assets/audio/enchanted.mp3", freq: 523.25 }
     ]
