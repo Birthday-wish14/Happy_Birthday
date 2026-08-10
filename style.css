@@ -1,0 +1,1310 @@
+/* ==========================================================================
+   IN MY BIRTHDAY ERA - STYLESHEET (SHANMATHI EDITION)
+   Taylor Swift Aesthetic, Mobile & Desktop Responsive, Dynamic Era Themes
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS CUSTOM PROPERTIES & THEME TOKENS
+   -------------------------------------------------------------------------- */
+:root {
+  --font-primary: 'Outfit', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --font-title: 'Cinzel', serif;
+  --font-script: 'Dancing Script', cursive;
+  --font-mono: 'Courier Prime', monospace;
+
+  /* Default Lover Theme */
+  --era-bg: linear-gradient(135deg, #2a0845 0%, #6441a5 50%, #ffb3c6 100%);
+  --era-accent: #ff69b4;
+  --era-accent-glow: rgba(255, 105, 180, 0.4);
+  --era-card: rgba(40, 20, 55, 0.7);
+  --era-border: rgba(255, 182, 198, 0.3);
+  --era-text: #fff0f5;
+  --era-subtext: #e2c2d6;
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Era Themes */
+html[data-era="fearless"] {
+  --era-bg: linear-gradient(135deg, #1a150b 0%, #3d2f16 50%, #664d1f 100%);
+  --era-accent: #ffd700;
+  --era-accent-glow: rgba(255, 215, 0, 0.4);
+  --era-card: rgba(40, 30, 15, 0.75);
+  --era-border: rgba(255, 215, 0, 0.35);
+  --era-text: #fff8dc;
+  --era-subtext: #d4af37;
+}
+
+html[data-era="red"] {
+  --era-bg: linear-gradient(135deg, #240508 0%, #4a0d14 50%, #7d1320 100%);
+  --era-accent: #ff2a4b;
+  --era-accent-glow: rgba(255, 42, 75, 0.4);
+  --era-card: rgba(50, 12, 18, 0.75);
+  --era-border: rgba(255, 42, 75, 0.35);
+  --era-text: #ffe6e9;
+  --era-subtext: #ff99a8;
+}
+
+html[data-era="1989"] {
+  --era-bg: linear-gradient(135deg, #0a1826 0%, #1e3c50 50%, #386b8b 100%);
+  --era-accent: #64dfdf;
+  --era-accent-glow: rgba(100, 223, 223, 0.4);
+  --era-card: rgba(18, 38, 55, 0.75);
+  --era-border: rgba(100, 223, 223, 0.35);
+  --era-text: #e0f2fe;
+  --era-subtext: #93c5fd;
+}
+
+html[data-era="reputation"] {
+  --era-bg: linear-gradient(135deg, #090a0f 0%, #171d24 50%, #0d1218 100%);
+  --era-accent: #00e676;
+  --era-accent-glow: rgba(0, 230, 118, 0.4);
+  --era-card: rgba(18, 22, 28, 0.85);
+  --era-border: rgba(0, 230, 118, 0.35);
+  --era-text: #e2e8f0;
+  --era-subtext: #94a3b8;
+}
+
+html[data-era="folklore"] {
+  --era-bg: linear-gradient(135deg, #151d18 0%, #2b3a2e 50%, #1c2b20 100%);
+  --era-accent: #a8bba2;
+  --era-accent-glow: rgba(168, 187, 162, 0.4);
+  --era-card: rgba(24, 34, 26, 0.8);
+  --era-border: rgba(168, 187, 162, 0.35);
+  --era-text: #f0f7f2;
+  --era-subtext: #b7c9b2;
+}
+
+html[data-era="midnights"] {
+  --era-bg: linear-gradient(135deg, #050a14 0%, #0f1c3d 50%, #261646 100%);
+  --era-accent: #b8c0ff;
+  --era-accent-glow: rgba(184, 192, 255, 0.4);
+  --era-card: rgba(15, 23, 48, 0.8);
+  --era-border: rgba(184, 192, 255, 0.35);
+  --era-text: #edf2f7;
+  --era-subtext: #c7d2fe;
+}
+
+html[data-era="ttpd"] {
+  --era-bg: linear-gradient(135deg, #141312 0%, #292624 50%, #3d3935 100%);
+  --era-accent: #e6c594;
+  --era-accent-glow: rgba(230, 197, 148, 0.4);
+  --era-card: rgba(36, 33, 30, 0.85);
+  --era-border: rgba(230, 197, 148, 0.35);
+  --era-text: #f5f2eb;
+  --era-subtext: #d6cebf;
+}
+
+
+/* --------------------------------------------------------------------------
+   2. RESET & BASE STYLES
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-primary);
+  background: var(--era-bg);
+  background-attachment: fixed;
+  color: var(--era-text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  transition: background var(--transition-slow);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--era-accent);
+  border-radius: var(--radius-full);
+}
+
+/* Canvas overlays */
+#sparkle-canvas, #confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   3. STICKY TOP ERA SELECTOR NAV BAR
+   -------------------------------------------------------------------------- */
+.eras-nav-sticky {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: var(--era-card);
+  border-bottom: 1px solid var(--era-border);
+  backdrop-filter: blur(16px);
+  padding: 10px 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.eras-nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.eras-nav-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  opacity: 0.9;
+  color: var(--era-accent);
+}
+
+.eras-pills {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  max-width: 100%;
+}
+
+.era-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid transparent;
+  color: var(--era-text);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition-fast);
+}
+
+.era-pill:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.era-pill.active {
+  background: var(--era-accent);
+  color: #000;
+  font-weight: 800;
+  box-shadow: 0 0 12px var(--era-accent-glow);
+}
+
+
+/* --------------------------------------------------------------------------
+   4. EASTER EGG TRACKER & HIDDEN STARS
+   -------------------------------------------------------------------------- */
+.easter-egg-tracker {
+  position: fixed;
+  top: 68px;
+  left: 16px;
+  z-index: 99;
+  background: var(--era-card);
+  border: 1px solid var(--era-border);
+  backdrop-filter: blur(12px);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--era-accent);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.easter-egg-tracker .star-icon {
+  color: var(--era-accent);
+  animation: pulse-star 2s infinite ease-in-out;
+}
+
+.hidden-star-btn {
+  position: absolute;
+  background: transparent;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  z-index: 20;
+  opacity: 0.7;
+  filter: drop-shadow(0 0 6px var(--era-accent));
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  animation: float-star 3s ease-in-out infinite alternate;
+}
+
+.hidden-star-btn:hover {
+  transform: scale(1.6) rotate(20deg);
+  opacity: 1;
+}
+
+.hidden-star-btn.found {
+  opacity: 0.15;
+  pointer-events: none;
+  filter: grayscale(1);
+}
+
+.inline-star {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+/* --------------------------------------------------------------------------
+   5. SECTION 1: THE VAULT INTRO SCREEN
+   -------------------------------------------------------------------------- */
+.step-section {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+}
+
+.vault-container {
+  max-width: 680px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+/* Double-Strand Friendship Bracelet Title */
+.bracelet-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.friendship-bracelet-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: 100%;
+}
+
+.bead {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #e2e2e2);
+  color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-title);
+  font-weight: 800;
+  font-size: 1rem;
+  box-shadow: inset -2px -2px 4px rgba(0,0,0,0.3), 0 4px 8px rgba(0,0,0,0.3);
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s ease;
+}
+
+.bead:hover {
+  transform: scale(1.25) rotate(10deg);
+}
+
+.bead-spacer {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--era-accent);
+  box-shadow: 0 0 8px var(--era-accent-glow);
+}
+
+/* Vault Card */
+.vault-door-card {
+  background: var(--era-card);
+  border: 1px solid var(--era-border);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius-lg);
+  padding: 44px 28px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.vault-ring-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, var(--era-accent-glow) 0%, transparent 60%);
+  pointer-events: none;
+  animation: rotate-bg 15s linear infinite;
+}
+
+.vault-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--era-border);
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  color: var(--era-accent);
+}
+
+.vault-title {
+  font-family: var(--font-title);
+  font-size: 2.6rem;
+  font-weight: 800;
+  margin-bottom: 14px;
+  background: linear-gradient(135deg, #ffffff 0%, var(--era-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 25px var(--era-accent-glow);
+}
+
+.vault-subtitle {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  opacity: 0.95;
+  max-width: 540px;
+  margin: 0 auto 24px auto;
+}
+
+.vault-instructions {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin-bottom: 28px;
+}
+
+.action-btn {
+  background: var(--era-accent);
+  color: #000;
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  padding: 16px 32px;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 30px var(--era-accent-glow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.action-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 40px var(--era-accent-glow);
+}
+
+
+/* --------------------------------------------------------------------------
+   6. MAIN EXPERIENCE CONTAINER & SECTIONS
+   -------------------------------------------------------------------------- */
+.main-experience-container {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 60px 16px 120px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.experience-card {
+  background: var(--era-card);
+  border: 1px solid var(--era-border);
+  backdrop-filter: blur(16px);
+  border-radius: var(--radius-lg);
+  padding: 40px 28px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.era-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--era-accent);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.card-header h2 {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.card-header p {
+  opacity: 0.85;
+  font-size: 0.95rem;
+}
+
+
+/* --------------------------------------------------------------------------
+   7. SECTION 2: CARDIGAN WAX-SEALED LETTER
+   -------------------------------------------------------------------------- */
+.envelope-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 130px 10px 40px 10px;
+  width: 100%;
+}
+
+.envelope {
+  width: 100%;
+  max-width: 500px;
+  height: 320px;
+  background: #e8d8c8;
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: all 0.6s ease;
+}
+
+.envelope-pocket {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #d4c2b0 0%, #c2af9c 100%);
+  clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
+  border-radius: 0 0 12px 12px;
+  z-index: 3;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 55%;
+  background: #b8a38f;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top;
+  transition: transform 0.6s ease;
+  z-index: 4;
+}
+
+.wax-seal {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  background: radial-gradient(circle, #b81424 0%, #7a0914 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffd700;
+  font-family: var(--font-title);
+  font-weight: 800;
+  font-size: 1.3rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  z-index: 5;
+  transition: transform 0.3s ease;
+}
+
+.wax-seal:hover {
+  transform: translate(-50%, -50%) scale(1.12);
+}
+
+.envelope.open .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope.open .wax-seal {
+  display: none;
+}
+
+.envelope.open {
+  height: 480px;
+}
+
+.letter-paper {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  background: #fffdf9;
+  color: #2b2621;
+  padding: 22px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  z-index: 2;
+  transition: transform 0.6s ease, top 0.6s ease, bottom 0.6s ease;
+  overflow-y: auto;
+}
+
+.envelope.open .letter-paper {
+  top: -110px;
+  bottom: 12px;
+  z-index: 5;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+}
+
+.letter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e2d9cd;
+  padding-bottom: 8px;
+  margin-bottom: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: #7a6e60;
+}
+
+.close-letter-btn {
+  background: #f1e6da;
+  border: 1px solid #d4c2b0;
+  color: #7a0914;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.close-letter-btn:hover {
+  background: #7a0914;
+  color: #ffffff;
+}
+
+.close-letter-action-btn {
+  background: #7a0914;
+  border: none;
+  color: #ffffff;
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(122, 9, 20, 0.3);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.close-letter-action-btn:hover {
+  transform: translateY(-2px);
+  background: #b81424;
+}
+
+.letter-salutation {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: #111;
+}
+
+.typewriter-content p {
+  font-family: var(--font-mono);
+  line-height: 1.65;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.letter-quote {
+  font-family: var(--font-serif) !important;
+  font-style: italic;
+  font-size: 0.95rem !important;
+  color: #7a0914 !important;
+  background: #fdf2e9;
+  border-left: 3px solid #b81424;
+  padding: 10px 14px;
+  border-radius: 4px;
+  margin: 14px 0 !important;
+  line-height: 1.6 !important;
+}
+
+.signature-font {
+  font-family: var(--font-script);
+  font-size: 1.7rem;
+  color: #b81424;
+}
+
+
+/* --------------------------------------------------------------------------
+   8. SECTION 3: 1989 POLAROID MEMORY WALL
+   -------------------------------------------------------------------------- */
+.polaroid-wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  position: relative;
+  padding: 16px 0;
+}
+
+.fairy-lights-string {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px var(--era-accent);
+}
+
+.polaroid-card {
+  background: #ffffff;
+  padding: 12px 12px 18px 12px;
+  border-radius: 4px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.polaroid-card:nth-child(even) { transform: rotate(-3deg); }
+.polaroid-card:nth-child(odd) { transform: rotate(3deg); }
+
+.polaroid-card:hover {
+  transform: scale(1.06) rotate(0deg) !important;
+  z-index: 10;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+}
+
+.polaroid-pin {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  background: var(--era-accent);
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+
+.polaroid-tape {
+  position: absolute;
+  top: -10px;
+  left: 16px;
+  width: 44px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.5);
+  transform: rotate(-15deg);
+}
+
+.polaroid-image-frame {
+  width: 100%;
+  height: 230px;
+  overflow: hidden;
+  background: #1a1a1a;
+  border-radius: 2px;
+}
+
+.polaroid-image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.4s ease;
+}
+
+.polaroid-image-frame img.fit-contain {
+  object-fit: contain;
+  background: #f1f5f9;
+}
+
+.polaroid-card:hover .polaroid-image-frame img {
+  transform: scale(1.06);
+}
+
+.polaroid-caption {
+  margin-top: 12px;
+  text-align: center;
+  color: #111;
+  font-family: var(--font-script);
+}
+
+.polaroid-caption span {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.polaroid-caption small {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #666;
+}
+
+
+/* --------------------------------------------------------------------------
+   9. SECTION 4: THE SWIFTIE BIRTHDAY CAKE & MAKE A WISH
+   -------------------------------------------------------------------------- */
+.cake-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 0;
+}
+
+.cake-wrapper {
+  position: relative;
+  padding-top: 50px;
+  margin-bottom: 32px;
+}
+
+.cake-3d {
+  width: 260px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.mirrorball-topper {
+  position: absolute;
+  top: -76px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mirrorball-topper::before {
+  content: '';
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.8), var(--era-accent));
+}
+
+.mirrorball {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #e2e8f0 45%, #64748b 100%);
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.9), 0 0 25px var(--era-accent-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  animation: mirrorball-spin 6s linear infinite;
+}
+
+.candles-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  position: absolute;
+  top: -24px;
+  width: 100%;
+  z-index: 5;
+}
+
+.candle {
+  width: 10px;
+  height: 30px;
+  background: repeating-linear-gradient(45deg, #ffffff, #ffffff 4px, var(--era-accent) 4px, var(--era-accent) 8px);
+  border-radius: 3px 3px 0 0;
+  position: relative;
+  cursor: pointer;
+}
+
+.candle-flame {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 16px;
+  background: radial-gradient(ellipse at bottom, #fff7a1 0%, #ff8c00 70%, transparent 100%);
+  border-radius: 50% 50% 35% 35%;
+  filter: drop-shadow(0 0 8px #ff8c00);
+  animation: flame-flicker 0.4s infinite alternate ease-in-out;
+  transition: opacity 0.2s ease;
+}
+
+.candle.extinguished .candle-flame {
+  display: none !important;
+  opacity: 0 !important;
+  animation: none !important;
+}
+
+.candle-smoke {
+  display: none;
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 16px;
+  background: rgba(200, 200, 200, 0.6);
+  border-radius: 50%;
+  filter: blur(2px);
+}
+
+.candle.extinguished .candle-smoke {
+  display: block;
+  animation: smoke-rise 1s ease-out forwards;
+}
+
+.cake-tier {
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.tier-top {
+  height: 55px;
+  width: 180px;
+  margin: 0 auto;
+  background: var(--era-accent);
+}
+
+.tier-middle {
+  height: 65px;
+  width: 220px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.25);
+  border-top: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.tier-bottom {
+  height: 75px;
+  width: 260px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.35);
+  border-top: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.tier-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-title);
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #ffffff;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  font-size: 0.85rem;
+}
+
+.wish-controls {
+  text-align: center;
+}
+
+.wish-status-box {
+  margin-top: 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--era-accent);
+}
+
+
+/* --------------------------------------------------------------------------
+   10. SECTION 5: LYRIC CARDS & VAULT PUZZLE
+   -------------------------------------------------------------------------- */
+.lyric-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 20px;
+  padding: 16px 0;
+}
+
+.lyric-card {
+  perspective: 1000px;
+  height: 190px;
+  cursor: pointer;
+}
+
+.lyric-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.lyric-card.flipped .lyric-card-inner {
+  transform: rotateY(180deg);
+}
+
+.lyric-card-front, .lyric-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--era-border);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.lyric-card-front {
+  background: var(--era-card);
+  color: var(--era-text);
+}
+
+.lyric-card-front i {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  color: var(--era-accent);
+}
+
+.card-song-title {
+  font-family: var(--font-title);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.card-album-tag {
+  font-size: 0.75rem;
+  opacity: 0.75;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.lyric-card-back {
+  background: #ffffff;
+  color: #111111;
+  transform: rotateY(180deg);
+}
+
+.lyric-card-back p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.lyric-card-back small {
+  font-family: var(--font-title);
+  font-weight: 700;
+  color: var(--era-accent);
+}
+
+
+/* --------------------------------------------------------------------------
+   11. FLOATING VINYL AUDIO PLAYER WIDGET
+   -------------------------------------------------------------------------- */
+.audio-player-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  background: var(--era-card);
+  border: 1px solid var(--era-border);
+  backdrop-filter: blur(16px);
+  border-radius: var(--radius-full);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  max-width: calc(100vw - 40px);
+}
+
+.vinyl-container {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #111;
+  border: 2px solid #333;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.vinyl-container.spinning {
+  animation: mirrorball-spin 4s linear infinite;
+}
+
+.vinyl-label {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--era-accent);
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+}
+
+.audio-details {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  max-width: 150px;
+}
+
+.track-title {
+  font-weight: 700;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.track-status {
+  font-size: 0.72rem;
+  opacity: 0.75;
+  white-space: nowrap;
+}
+
+.audio-controls {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.audio-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: var(--era-text);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  transition: background 0.2s ease;
+}
+
+.audio-btn:hover {
+  background: var(--era-accent);
+  color: #000;
+}
+
+
+/* --------------------------------------------------------------------------
+   12. LIGHTBOX & MODAL DIALOG
+   -------------------------------------------------------------------------- */
+.custom-dialog {
+  border: none;
+  background: transparent;
+  padding: 0;
+  max-width: 90vw;
+  width: 550px;
+  margin: auto;
+}
+
+.custom-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+}
+
+.dialog-content {
+  background: var(--era-card);
+  border: 1px solid var(--era-border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  position: relative;
+  color: var(--era-text);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+}
+
+.dialog-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  background: transparent;
+  border: none;
+  color: var(--era-text);
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+
+/* --------------------------------------------------------------------------
+   13. FOOTER
+   -------------------------------------------------------------------------- */
+.swiftie-footer {
+  text-align: center;
+  padding: 30px 0;
+  opacity: 0.85;
+  font-size: 0.9rem;
+}
+
+.heart-pulse {
+  color: var(--era-accent);
+  animation: pulse-star 1.5s infinite;
+}
+
+.sub-footer {
+  font-size: 0.78rem;
+  margin-top: 6px;
+  opacity: 0.7;
+}
+
+
+/* --------------------------------------------------------------------------
+   14. KEYFRAME ANIMATIONS
+   -------------------------------------------------------------------------- */
+@keyframes mirrorball-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes flame-flicker {
+  0% { transform: translateX(-50%) scale(1); opacity: 0.9; }
+  100% { transform: translateX(-50%) scale(1.15) rotate(3deg); opacity: 1; }
+}
+
+@keyframes smoke-rise {
+  0% { opacity: 0.8; transform: translateX(-50%) translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-25px) scale(2); }
+}
+
+@keyframes pulse-star {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
+@keyframes float-star {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-8px); }
+}
+
+@keyframes rotate-bg {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+/* --------------------------------------------------------------------------
+   15. RESPONSIVE BREAKPOINTS (MOBILE & TABLET OPTIMIZATIONS)
+   -------------------------------------------------------------------------- */
+@media (max-width: 650px) {
+  .eras-nav-inner {
+    justify-content: center;
+  }
+  .eras-nav-title {
+    font-size: 0.75rem;
+  }
+  .bead {
+    width: 24px;
+    height: 24px;
+    font-size: 0.8rem;
+  }
+  .bead-spacer {
+    width: 8px;
+    height: 8px;
+  }
+  .vault-title {
+    font-size: 1.9rem;
+  }
+  .vault-subtitle {
+    font-size: 0.92rem;
+  }
+  .vault-door-card {
+    padding: 32px 18px;
+  }
+  .main-experience-container {
+    padding: 40px 12px 100px 12px;
+    gap: 40px;
+  }
+  .experience-card {
+    padding: 24px 16px;
+  }
+  .envelope {
+    height: 260px;
+  }
+  .envelope-pocket {
+    border-left-width: 140px;
+    border-right-width: 140px;
+    border-top-width: 130px;
+    border-bottom-width: 130px;
+  }
+  .envelope-flap {
+    border-left-width: 140px;
+    border-right-width: 140px;
+    border-top-width: 130px;
+  }
+  .wax-seal {
+    top: 100px;
+    width: 48px;
+    height: 48px;
+    font-size: 1.1rem;
+  }
+  .audio-player-widget {
+    bottom: 12px;
+    right: 12px;
+    padding: 6px 12px;
+  }
+  .audio-details {
+    max-width: 100px;
+  }
+}

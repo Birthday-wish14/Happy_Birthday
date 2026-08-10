@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en" data-era="lover">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shanmathi's Birthday Era ✨ | Happy 23rd Birthday!</title>
+  <meta name="description" content="A Taylor Swift themed birthday surprise for Shanmathi Bhavani V, celebrating her birthday with favorite songs, photos, memories & magic.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Shanmathi's Birthday Era ✨">
+  <meta property="og:description" content="A Swiftie coded birthday surprise for Shanmathi Bhavani V!">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@600;700&family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Falling Sparkles & Canvas Overlay -->
+  <canvas id="sparkle-canvas"></canvas>
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- HTML5 Audio Element for Real MP3 Songs -->
+  <audio id="bgAudio" preload="auto"></audio>
+
+  <!-- Sticky Top Era Selector Navigation Bar -->
+  <nav class="eras-nav-sticky" id="erasNav">
+    <div class="eras-nav-inner">
+      <div class="eras-nav-title"><i class="fa-solid fa-compact-disc"></i> Choose Era:</div>
+      <div class="eras-pills">
+        <button class="era-pill" data-era-target="fearless" title="Fearless (Gold)">💛 Fearless</button>
+        <button class="era-pill" data-era-target="red" title="Red (Crimson)">❤️ Red</button>
+        <button class="era-pill" data-era-target="1989" title="1989 (Sky Blue)">🩵 1989</button>
+        <button class="era-pill" data-era-target="reputation" title="Reputation (Gothic)">🖤 Reputation</button>
+        <button class="era-pill active" data-era-target="lover" title="Lover (Pastel Pink)">💖 Lover</button>
+        <button class="era-pill" data-era-target="folklore" title="Folklore (Cozy Forest)">🌲 Folklore</button>
+        <button class="era-pill" data-era-target="midnights" title="Midnights (Starry Night)">💙 Midnights</button>
+        <button class="era-pill" data-era-target="ttpd" title="TTPD (Typewriter)">🤍 TTPD</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Easter Egg Tracker Badge -->
+  <div class="easter-egg-tracker" id="easterEggTracker" title="Find 13 hidden Swiftie stars!">
+    <i class="fa-solid fa-star star-icon"></i>
+    <span id="starCount">0</span> / 13 Stars Found
+  </div>
+
+  <!-- SECTION 1: THE VAULT INTRO SCREEN -->
+  <section class="step-section active" id="step-vault">
+    <div class="vault-container">
+      
+      <!-- Double-Strand Friendship Bracelet Header -->
+      <div class="bracelet-wrapper">
+        <div class="friendship-bracelet-container" id="braceletStrand1">
+          <!-- Strand 1 populated by JS: SHANMATHI BHAVANI V -->
+        </div>
+        <div class="friendship-bracelet-container strand-sub" id="braceletStrand2">
+          <!-- Strand 2 populated by JS: AUGUST 14 ✦ BIRTHDAY ERA -->
+        </div>
+      </div>
+
+      <div class="vault-door-card">
+        <div class="vault-ring-glow"></div>
+        <div class="vault-badge">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> AUG 14, 2003 • 23rd EDITION <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </div>
+        
+        <h1 class="vault-title">Shanmathi's Birthday Era</h1>
+        <p class="vault-subtitle">Happy Birthday Shanmathi Bhavani V! A special Swiftie celebration created just for you, filled with your favorite Taylor Swift songs, memories & birthday magic.</p>
+        
+        <div class="vault-instructions">
+          <p><i class="fa-solid fa-music"></i> Turn on audio for the full Eras experience!</p>
+        </div>
+
+        <button class="action-btn glow-btn" id="unlockVaultBtn">
+          <i class="fa-solid fa-key"></i> UNLOCK THE BIRTHDAY VAULT
+        </button>
+      </div>
+
+      <!-- Hidden Star 1 -->
+      <button class="hidden-star-btn" data-star-id="1" style="top: 15%; left: 8%;">⭐</button>
+      <!-- Hidden Star 2 -->
+      <button class="hidden-star-btn" data-star-id="2" style="bottom: 12%; right: 10%;">⭐</button>
+
+    </div>
+  </section>
+
+
+  <!-- MAIN CONTENT CONTAINER (revealed after vault unlock) -->
+  <div class="main-experience-container hidden" id="mainExperience">
+
+    <!-- SECTION 2: CARDIGAN WAX-SEALED LETTER -->
+    <section class="experience-card" id="section-letter">
+      <div class="card-header">
+        <span class="era-badge"><i class="fa-solid fa-envelope-open-text"></i> THE CARDIGAN LETTER</span>
+        <h2>A Note For Shanmathi</h2>
+        <p>Click the wax seal to unfold your special birthday message...</p>
+      </div>
+
+      <div class="envelope-wrapper">
+        <div class="envelope" id="waxEnvelope">
+          <div class="envelope-flap"></div>
+          <div class="wax-seal" id="waxSeal" title="Click to open letter">
+            <span class="wax-initial">13</span>
+          </div>
+          <div class="envelope-pocket"></div>
+          
+          <div class="letter-paper" id="letterPaper">
+            <div class="letter-header">
+              <span class="letter-date" id="letterDate">August 14th</span>
+              <span class="letter-stamp">SHANMATHI ERA ✨</span>
+            </div>
+            <div class="letter-body">
+              <p class="letter-salutation">Dearest Shanmathi Bhavani V,</p>
+              <div class="typewriter-content" id="typewriterLetter">
+                <p>Happy Birthday Shanmathi! 🎂✨</p>
+                <p>Today is all about celebrating you! Born on August 14, 2003, you bring so much warmth, kindness, and beauty into the world.</p>
+                <p>Like Taylor sings in <em>August</em>, <em>"August slipped away into a moment in time..."</em> but today, we freeze time to celebrate your wonderful 23rd birthday!</p>
+                <p class="letter-quote">No matter how hard life can be, don't forget to smile... because your smile is one of the most beautiful things in the world! 😊✨</p>
+                <p>May your day shine bright with <em>Daylight</em>, may your year be filled with <em>Enchanted</em> moments, <em>Love Story</em> magic, and endless happiness!</p>
+                <p class="letter-signoff">With all my heart & happiest wishes,<br><span class="signature-font">Always & Forever 💕</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hidden Star 3 -->
+      <button class="hidden-star-btn" data-star-id="3" style="top: 40%; right: 5%;">⭐</button>
+    </section>
+
+
+    <!-- SECTION 3: 1989 POLAROID MEMORY WALL (FEATURING SHANMATHI'S REAL PHOTOS) -->
+    <section class="experience-card" id="section-gallery">
+      <div class="card-header">
+        <span class="era-badge"><i class="fa-solid fa-camera-retro"></i> POLAROID MEMORIES</span>
+        <h2>Shanmathi's Photo Gallery</h2>
+        <p>Click any polaroid photo to zoom into the moment...</p>
+      </div>
+
+      <div class="polaroid-wall">
+        <div class="fairy-lights-string"></div>
+
+        <!-- Polaroid 1: Heart Mirror Selfie -->
+        <div class="polaroid-card" data-tilt data-photo-id="1">
+          <div class="polaroid-pin"></div>
+          <div class="polaroid-tape"></div>
+          <div class="polaroid-image-frame">
+            <img src="./assets/images/photo1.jpg" alt="Shanmathi Heart Mirror Selfie">
+          </div>
+          <div class="polaroid-caption">
+            <span>Heart Mirror Selfie 💚</span>
+            <small>Aesthetic Vibes</small>
+          </div>
+        </div>
+
+        <!-- Polaroid 2: Little Shanmathi Baby Photo -->
+        <div class="polaroid-card" data-tilt data-photo-id="2">
+          <div class="polaroid-pin"></div>
+          <div class="polaroid-tape"></div>
+          <div class="polaroid-image-frame">
+            <img src="./assets/images/photo2.jpg" alt="Little Shanmathi Baby Photo" class="fit-contain">
+          </div>
+          <div class="polaroid-caption">
+            <span>Little Shanmathi 🌸</span>
+            <small>Baby Years</small>
+          </div>
+        </div>
+
+        <!-- Polaroid 3: Green Saree Butterfly Clip -->
+        <div class="polaroid-card" data-tilt data-photo-id="3">
+          <div class="polaroid-pin"></div>
+          <div class="polaroid-tape"></div>
+          <div class="polaroid-image-frame">
+            <img src="./assets/images/photo3.jpg" alt="Shanmathi Saree Pose">
+          </div>
+          <div class="polaroid-caption">
+            <span>Elegance & Butterflies ✨</span>
+            <small>Enchanted Era</small>
+          </div>
+        </div>
+
+        <!-- Polaroid 4: Album Photo Sitting Chair -->
+        <div class="polaroid-card" data-tilt data-photo-id="4">
+          <div class="polaroid-pin"></div>
+          <div class="polaroid-tape"></div>
+          <div class="polaroid-image-frame">
+            <img src="./assets/images/photo4.jpg" alt="Childhood Memory Photo">
+          </div>
+          <div class="polaroid-caption">
+            <span>Childhood Memories 🎀</span>
+            <small>Sweetest Smile</small>
+          </div>
+        </div>
+
+        <!-- Polaroid 5: Rooftop Skyline Pose -->
+        <div class="polaroid-card" data-tilt data-photo-id="5">
+          <div class="polaroid-pin"></div>
+          <div class="polaroid-tape"></div>
+          <div class="polaroid-image-frame">
+            <img src="./assets/images/photo5.jpg" alt="Shanmathi Rooftop Sunset Pose">
+          </div>
+          <div class="polaroid-caption">
+            <span>Rooftop Skyline & Sunsets ☀️</span>
+            <small>Lover Era</small>
+          </div>
+        </div>
+
+        <!-- Polaroid 6: Fairy Lights Bokeh Portrait -->
+        <div class="polaroid-card" data-tilt data-photo-id="6">
+          <div class="polaroid-pin"></div>
+          <div class="polaroid-tape"></div>
+          <div class="polaroid-image-frame">
+            <img src="./assets/images/photo6.jpg" alt="Shanmathi Fairy Lights Portrait">
+          </div>
+          <div class="polaroid-caption">
+            <span>Sparkling Lights & Smile ✨</span>
+            <small>Bejeweled Era</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hidden Star 4 -->
+      <button class="hidden-star-btn" data-star-id="4" style="bottom: 10%; left: 4%;">⭐</button>
+      <!-- Hidden Star 5 -->
+      <button class="hidden-star-btn" data-star-id="5" style="top: 25%; left: 48%;">⭐</button>
+    </section>
+
+
+    <!-- SECTION 4: THE SWIFTIE BIRTHDAY CAKE & MAKE A WISH -->
+    <section class="experience-card" id="section-cake">
+      <div class="card-header">
+        <span class="era-badge"><i class="fa-solid fa-cake-candles"></i> CELEBRATION TIME</span>
+        <h2>Make A Wish & Blow Out Candles</h2>
+        <p>Click each candle flame or tap the button to blow out all 13 candles!</p>
+      </div>
+
+      <div class="cake-stage">
+        <!-- 3D Birthday Cake Container -->
+        <div class="cake-wrapper">
+          <div class="cake-stand"></div>
+          
+          <div class="cake-3d" id="cake3D">
+            <!-- Disco Mirrorball Topper -->
+            <div class="mirrorball-topper" title="Eras Mirrorball">
+              <div class="mirrorball">
+                🪩
+              </div>
+            </div>
+
+            <!-- Candle Deck (13 Candles) -->
+            <div class="candles-row" id="candlesRow">
+              <!-- Generated by JS -->
+            </div>
+
+            <!-- Cake Tier Top -->
+            <div class="cake-tier tier-top">
+              <div class="icing-drips"></div>
+              <div class="tier-label">23</div>
+            </div>
+            
+            <!-- Cake Tier Middle -->
+            <div class="cake-tier tier-middle">
+              <div class="icing-drips"></div>
+              <div class="tier-label">SHANMATHI</div>
+            </div>
+
+            <!-- Cake Tier Bottom -->
+            <div class="cake-tier tier-bottom">
+              <div class="icing-drips"></div>
+              <div class="plate-base"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wish-controls">
+          <button class="action-btn blow-btn" id="blowCandlesBtn">
+            <i class="fa-solid fa-wind"></i> BLOW OUT CANDLES & MAKE A WISH!
+          </button>
+          
+          <div class="wish-status-box" id="wishStatus">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> 13 Candles are lit! Click them or press the button to blow them out...
+          </div>
+        </div>
+      </div>
+
+      <!-- Hidden Star 6 -->
+      <button class="hidden-star-btn" data-star-id="6" style="top: 15%; right: 12%;">⭐</button>
+      <!-- Hidden Star 7 -->
+      <button class="hidden-star-btn" data-star-id="7" style="bottom: 20%; left: 8%;">⭐</button>
+    </section>
+
+
+    <!-- SECTION 5: SHANMATHI'S FAVORITE SONGS LYRIC CARDS -->
+    <section class="experience-card" id="section-puzzle">
+      <div class="card-header">
+        <span class="era-badge"><i class="fa-solid fa-music"></i> HER FAVORITE TRACKLIST</span>
+        <h2>Shanmathi's Swiftie Lyric Vault</h2>
+        <p>Click the cards to reveal lyrics from Shanmathi's favorite Taylor Swift songs!</p>
+      </div>
+
+      <div class="lyric-cards-grid" id="lyricGrid">
+        
+        <!-- Card 1: August -->
+        <div class="lyric-card" data-quote="1">
+          <div class="lyric-card-inner">
+            <div class="lyric-card-front">
+              <i class="fa-solid fa-sun"></i>
+              <span class="card-song-title">August</span>
+              <small class="card-album-tag">folklore</small>
+            </div>
+            <div class="lyric-card-back">
+              <p>"August slipped away into a moment in time, 'cause it was never mine..."</p>
+              <small>- August 🌾</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: All Too Well -->
+        <div class="lyric-card" data-quote="2">
+          <div class="lyric-card-inner">
+            <div class="lyric-card-front">
+              <i class="fa-solid fa-scarf"></i>
+              <span class="card-song-title">All Too Well</span>
+              <small class="card-album-tag">Red (TV)</small>
+            </div>
+            <div class="lyric-card-back">
+              <p>"And I know it's long gone and there was nothing else I could do, and I forget about you long enough to forget why I needed to..."</p>
+              <small>- All Too Well ❤️</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Daylight -->
+        <div class="lyric-card" data-quote="3">
+          <div class="lyric-card-inner">
+            <div class="lyric-card-front">
+              <i class="fa-solid fa-sun-plant-wilt"></i>
+              <span class="card-song-title">Daylight</span>
+              <small class="card-album-tag">Lover</small>
+            </div>
+            <div class="lyric-card-back">
+              <p>"I wanna be defined by the things that I love, not the things I hate... I step into the daylight and let it go."</p>
+              <small>- Daylight ☀️</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Paper Rings -->
+        <div class="lyric-card" data-quote="4">
+          <div class="lyric-card-inner">
+            <div class="lyric-card-front">
+              <i class="fa-solid fa-ring"></i>
+              <span class="card-song-title">Paper Rings</span>
+              <small class="card-album-tag">Lover</small>
+            </div>
+            <div class="lyric-card-back">
+              <p>"I like shiny things, but I'd marry you with paper rings... Ah, that's right, darling, you're the one I want!"</p>
+              <small>- Paper Rings 💌</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: Enchanted -->
+        <div class="lyric-card" data-quote="5">
+          <div class="lyric-card-inner">
+            <div class="lyric-card-front">
+              <i class="fa-solid fa-wand-magic"></i>
+              <span class="card-song-title">Enchanted</span>
+              <small class="card-album-tag">Speak Now</small>
+            </div>
+            <div class="lyric-card-back">
+              <p>"This night is sparkling, don't you let it go... I'm wonderstruck, blushing all the way home!"</p>
+              <small>- Enchanted 💜</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Hidden Star 8 -->
+      <button class="hidden-star-btn" data-star-id="8" style="top: 30%; right: 2%;">⭐</button>
+      <!-- Hidden Star 9 -->
+      <button class="hidden-star-btn" data-star-id="9" style="bottom: 5%; right: 45%;">⭐</button>
+      <!-- Hidden Star 10 -->
+      <button class="hidden-star-btn" data-star-id="10" style="top: 10%; left: 3%;">⭐</button>
+    </section>
+
+    <!-- Hidden Star 11 -->
+    <button class="hidden-star-btn" data-star-id="11" style="bottom: 2%; right: 15%;">⭐</button>
+    <!-- Hidden Star 12 -->
+    <button class="hidden-star-btn" data-star-id="12" style="bottom: 2%; left: 15%;">⭐</button>
+
+    <!-- FOOTER -->
+    <footer class="swiftie-footer">
+      <p>Coded with <i class="fa-solid fa-heart heart-pulse"></i> for Shanmathi Bhavani V.</p>
+      <p class="sub-footer">Shanmathi's Birthday Era • Born Aug 14, 2003 • Happy 23rd Birthday!</p>
+      <!-- Hidden Star 13 -->
+      <button class="hidden-star-btn inline-star" data-star-id="13">⭐</button>
+    </footer>
+
+  </div>
+
+
+  <!-- FLOATING VINYL AUDIO PLAYER WIDGET -->
+  <div class="audio-player-widget" id="audioPlayerWidget">
+    <div class="vinyl-container" id="vinylDisc">
+      <div class="vinyl-grooves"></div>
+      <div class="vinyl-label">
+        <i class="fa-solid fa-music"></i>
+      </div>
+    </div>
+    
+    <div class="audio-details">
+      <span class="track-title" id="trackTitle">August</span>
+      <span class="track-status" id="trackStatus">folklore • Shanmathi's Fav</span>
+    </div>
+
+    <div class="audio-controls">
+      <button class="audio-btn" id="prevTrackBtn" title="Previous Track"><i class="fa-solid fa-backward"></i></button>
+      <button class="audio-btn" id="playAudioBtn" title="Play/Pause Music"><i class="fa-solid fa-play" id="playIcon"></i></button>
+      <button class="audio-btn" id="nextTrackBtn" title="Next Track"><i class="fa-solid fa-forward"></i></button>
+      <button class="audio-btn" id="muteAudioBtn" title="Mute/Unmute Sound"><i class="fa-solid fa-volume-high" id="muteIcon"></i></button>
+    </div>
+  </div>
+
+
+  <!-- LIGHTBOX / DIALOG MODAL -->
+  <dialog class="custom-dialog" id="lightboxModal">
+    <div class="dialog-content">
+      <button class="dialog-close-btn" id="closeModalBtn">&times;</button>
+      <div class="dialog-body" id="modalBody">
+        <!-- Content injected dynamically -->
+      </div>
+    </div>
+  </dialog>
+
+
+  <!-- Application Script -->
+  <script src="script.js"></script>
+</body>
+</html>
