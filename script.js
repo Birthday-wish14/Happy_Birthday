@@ -397,49 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  /* ------------------------------------------------------------------------
-     10. SECRET 13 EASTER EGG STAR COUNTER (WITH ⭐ EMOJI)
-     ------------------------------------------------------------------------ */
-  const starButtons = document.querySelectorAll('.hidden-star-btn');
-  const starCountEl = document.getElementById('starCount');
 
-  starButtons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (!btn.classList.contains('found')) {
-        btn.classList.add('found');
-        starsFoundCount++;
-        starCountEl.textContent = starsFoundCount;
-
-        playTone(880 + starsFoundCount * 40, 'triangle', 0.2);
-        createParticleBurst(e.clientX, e.clientY, 10, ['#ffd700', '#ffffff']);
-
-        if (starsFoundCount === CONFIG.totalEasterEggStars) {
-          setTimeout(unlockBejeweledSecretVault, 400);
-        }
-      }
-    });
-  });
-
-  function unlockBejeweledSecretVault() {
-    modalBody.innerHTML = `
-      <div style="text-align: center; padding: 20px;">
-        <h2 style="font-family: 'Cinzel', serif; color: #ffd700; font-size: 2.2rem; margin-bottom: 12px;">
-          💎 SHANMATHI'S BEJEWELED VAULT UNLOCKED! 💎
-        </h2>
-        <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px;">
-          You found all 13 hidden Swiftie stars ⭐! Shanmathi truly shines brighter than the whole place!
-        </p>
-        <div style="font-size: 3rem; margin: 16px 0;">⭐ 👑 💖 🎂 ⭐</div>
-        <p style="font-style: italic; color: #ff69b4;">
-          "Best believe you're still bejeweled!"
-        </p>
-      </div>
-    `;
-    lightboxModal.showModal();
-    launchConfettiBurst(200);
-    playVictoryChime();
-  }
 
 
   /* ------------------------------------------------------------------------
