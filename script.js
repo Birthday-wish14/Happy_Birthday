@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
     bgAudio.addEventListener('ended', () => {
       currentTrackIndex = (currentTrackIndex + 1) % CONFIG.favoriteSongs.length;
       loadTrack(currentTrackIndex);
-      bgAudio.play().catch(() => {});
+      bgAudio.play().catch(() => { });
     });
   }
 
@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isAudioPlaying && !isMuted) {
         const freq = melody[noteIndex % melody.length];
         playTone(freq, 'sine', 0.28, 0.08);
-        
+
         if (noteIndex % 3 === 0) {
           playTone(freq * 1.5, 'triangle', 0.18, 0.04);
         }
@@ -320,6 +320,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  lightboxModal.addEventListener('close', () => {
+    const vid = modalBody.querySelector('video');
+    if (vid) {
+      vid.pause();
+      vid.src = '';
+    }
+    if (surpriseTimerInterval) {
+      clearInterval(surpriseTimerInterval);
+      surpriseTimerInterval = null;
+    }
+  });
+
 
   /* ------------------------------------------------------------------------
      8. INTERACTIVE 13-CANDLE CAKE & CANDLE BLOWING
@@ -372,10 +384,140 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  let surpriseTimerInterval = null;
+
   function onAllCandlesBlown() {
     wishStatus.innerHTML = `🎉 SHANMATHI'S BIRTHDAY WISH IS SENT TO THE UNIVERSE! HAPPY 23rd BIRTHDAY! 🎉`;
     launchConfettiBurst(160);
     playVictoryChime();
+
+    setTimeout(() => {
+      startSurpriseModalFlow();
+    }, 800);
+  }
+
+  function startSurpriseModalFlow() {
+    const wasPlayingBeforeVideo = isAudioPlaying;
+
+    // Phase 1: Show Countdown in Pop-up
+    let countdownVal = 3;
+
+    modalBody.innerHTML = `
+      <div class="surprise-container">
+        <div class="surprise-badge">
+          <i class="fa-solid fa-gift"></i> SURPRISE UNLOCKED
+        </div>
+        <h2 class="surprise-title">Hold on tight! ✨</h2>
+        <p class="surprise-subtitle">Wait for your surprise message...</p>
+        <div class="countdown-box">
+          <div class="countdown-number" id="surpriseCountdown">3</div>
+        </div>
+      </div>
+    `;
+
+    if (lightboxModal && !lightboxModal.open) {
+      lightboxModal.showModal();
+    }
+
+    const countdownEl = document.getElementById('surpriseCountdown');
+    if (surpriseTimerInterval) clearInterval(surpriseTimerInterval);
+
+    surpriseTimerInterval = setInterval(() => {
+      countdownVal--;
+      if (countdownVal > 0) {
+        if (countdownEl) {
+          countdownEl.textContent = countdownVal;
+          countdownEl.style.animation = 'none';
+          void countdownEl.offsetWidth;
+          countdownEl.style.animation = 'pulseCount 1s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        }
+        playTone(600 + (3 - countdownVal) * 100, 'sine', 0.15);
+      } else {
+        clearInterval(surpriseTimerInterval);
+        surpriseTimerInterval = null;
+        showVideoPhase(wasPlayingBeforeVideo);
+      }
+    }, 1000);
+  }
+
+  function showVideoPhase(wasPlayingBeforeVideo) {
+    // Pause background audio so video audio is clear
+    if (bgAudio && !bgAudio.paused) {
+      bgAudio.pause();
+    }
+    if (synthInterval) {
+      clearInterval(synthInterval);
+    }
+
+    modalBody.innerHTML = `
+      <div class="surprise-container">
+        <div class="surprise-badge">
+          <i class="fa-solid fa-heart"></i> FOR SHANMATHI
+        </div>
+        <h2 class="surprise-title">This is to remind you of your smile ✨</h2>
+        <p class="surprise-subtitle">Because your smile is the brightest light in every Era! 💖</p>
+        <div class="surprise-video-wrapper">
+          <video class="surprise-video" id="surpriseVid" src="./assets/video/video.mp4" autoplay playsinline controls></video>
+        </div>
+      </div>
+    `;
+
+    const vid = document.getElementById('surpriseVid');
+    if (vid) {
+      vid.play().catch(err => {
+        console.log("Autoplay with sound prevented, attempting play:", err);
+      });
+
+      let transitionDone = false;
+      const handleVideoEnd = () => {
+        if (transitionDone) return;
+        transitionDone = true;
+        showSmileReminderPhase(wasPlayingBeforeVideo);
+      };
+
+      vid.addEventListener('ended', handleVideoEnd);
+
+      // Fallback timeout after ~13 seconds in case video ended event isn't caught
+      setTimeout(() => {
+        if (!transitionDone && lightboxModal.open) {
+          handleVideoEnd();
+        }
+      }, 13500);
+    }
+  }
+
+  function showSmileReminderPhase(wasPlayingBeforeVideo) {
+    modalBody.innerHTML = `
+      <div class="surprise-container smile-reminder-box">
+        <div class="smile-emoji">😊✨</div>
+        <h2 class="surprise-title" style="font-size: 2rem; color: var(--era-accent, #ffd700);">Don't forget to smile!</h2>
+        <p class="surprise-subtitle" style="font-size: 1.15rem; margin-top: 8px;">
+          Keep spreading warmth, happiness and sunshine wherever you go! 💕
+        </p>
+      </div>
+    `;
+
+    launchConfettiBurst(120);
+    playVictoryChime();
+
+    // Show final message for 2.8 seconds, then auto-close pop-up & resume background audio
+    setTimeout(() => {
+      if (lightboxModal && lightboxModal.open) {
+        lightboxModal.close();
+      }
+
+      // Resume background music if it was playing previously
+      if (wasPlayingBeforeVideo && bgAudio) {
+        bgAudio.play().then(() => {
+          isAudioPlaying = true;
+          if (vinylDisc) vinylDisc.classList.add('spinning');
+          const playIcon = document.getElementById('playIcon');
+          if (playIcon) playIcon.className = 'fa-solid fa-pause';
+        }).catch(err => {
+          console.log("Background music resume error:", err);
+        });
+      }
+    }, 2800);
   }
 
   function playVictoryChime() {
