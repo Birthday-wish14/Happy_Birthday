@@ -37,6 +37,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const bgAudio = document.getElementById('bgAudio');
 
+  /* ------------------------------------------------------------------------
+     ANALYTICS & GOOGLE SHEETS TRACKER (METHOD 1: PERSONALIZED LINKS)
+     ------------------------------------------------------------------------ */
+  // Paste your Google Apps Script Web App Deployment URL below:
+  const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwSt8qHNouvmfwjgLQhrjgYWNCt-mBXDndjzsn7MCw1bpUzwHjXaEmTlHrOTBqzt_Ht/exec";
+
+  function getVisitorName() {
+    const urlParams = new URLSearchParams(window.location.search);
+    let nameFromUrl = urlParams.get('name');
+    if (nameFromUrl && nameFromUrl.trim()) {
+      const cleanName = nameFromUrl.trim();
+      localStorage.setItem('birthdayVisitorName', cleanName);
+      return cleanName;
+    }
+    return localStorage.getItem('birthdayVisitorName') || "Shanmathi";
+  }
+
+  function trackAnalyticsEvent(eventType) {
+    const visitor = getVisitorName();
+    if (!GOOGLE_APPS_SCRIPT_URL || GOOGLE_APPS_SCRIPT_URL.includes("PASTE_YOUR_GOOGLE_APPS_SCRIPT")) {
+      return;
+    }
+    try {
+      fetch(GOOGLE_APPS_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: visitor, event: eventType })
+      }).catch(err => console.error("Analytics request error:", err));
+    } catch (e) {
+      console.error("Analytics fetch error:", e);
+    }
+  }
+
+  // 1) TRACK EVENT: Opening the Web
+  trackAnalyticsEvent("page_open");
+
 
   /* ------------------------------------------------------------------------
      2. FRIENDSHIP BRACELET BUILDER (DOUBLE STRAND)
@@ -289,6 +326,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const mainExperience = document.getElementById('mainExperience');
 
   unlockVaultBtn.addEventListener('click', () => {
+    // 2) TRACK EVENT: Clicking the Birthday Vault
+    trackAnalyticsEvent("vault_click");
+
     if (!isAudioPlaying) {
       toggleAudio();
     }
@@ -432,6 +472,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let surpriseTimerInterval = null;
 
   function onAllCandlesBlown() {
+    // 3) TRACK EVENT: Opening of Secret Message after blowing all candles
+    trackAnalyticsEvent("secret_message_open");
+
     wishStatus.innerHTML = `🎉 SHANMATHI'S BIRTHDAY WISH IS SENT TO THE UNIVERSE! HAPPY 23rd BIRTHDAY! 🎉`;
     launchConfettiBurst(160);
     playVictoryChime();
