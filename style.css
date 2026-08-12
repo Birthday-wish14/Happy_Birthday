@@ -934,6 +934,7 @@ body {
   align-items: center;
   justify-content: center;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .lyric-card-front {
@@ -979,6 +980,41 @@ body {
   font-family: var(--font-title);
   font-weight: 700;
   color: var(--era-accent);
+}
+
+/* Now Playing glowing indicator for lyric cards */
+.lyric-card.now-playing .lyric-card-front,
+.lyric-card.now-playing .lyric-card-back {
+  border-color: var(--era-accent);
+  box-shadow: 0 0 22px var(--era-accent-glow, rgba(255, 215, 0, 0.45));
+}
+
+.lyric-card.now-playing .lyric-card-front::after {
+  content: '▶ PLAYING';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  background: var(--era-accent);
+  color: #000;
+  padding: 3px 8px;
+  border-radius: 12px;
+  animation: pulseCount 1.5s infinite ease-in-out;
+}
+
+.lyric-card.now-playing .lyric-card-back::after {
+  content: '♫ Playing Now';
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #111;
+  background: var(--era-accent);
+  padding: 2px 8px;
+  border-radius: 10px;
 }
 
 
@@ -1182,9 +1218,20 @@ body {
 }
 
 @keyframes pulseCount {
-  0% { transform: scale(0.7); opacity: 0.3; }
-  50% { transform: scale(1.15); opacity: 1; }
-  100% { transform: scale(1); opacity: 0.9; }
+  0% {
+    transform: scale(0.7);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
 }
 
 .surprise-video-wrapper {
@@ -1212,8 +1259,15 @@ body {
 }
 
 @keyframes smilePop {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .smile-emoji {
@@ -1224,8 +1278,15 @@ body {
 }
 
 @keyframes floatHeart {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-8px) scale(1.08); }
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-8px) scale(1.08);
+  }
 }
 
 

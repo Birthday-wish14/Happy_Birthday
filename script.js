@@ -136,6 +136,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const trackTitle = document.getElementById('trackTitle');
   const trackStatus = document.getElementById('trackStatus');
 
+  function updateActiveLyricCard() {
+    const cards = document.querySelectorAll('.lyric-card');
+    cards.forEach((card, idx) => {
+      const trackIdxAttr = card.getAttribute('data-track-index');
+      const targetIndex = trackIdxAttr !== null ? parseInt(trackIdxAttr, 10) : idx;
+      if (targetIndex === currentTrackIndex && isAudioPlaying) {
+        card.classList.add('now-playing');
+      } else {
+        card.classList.remove('now-playing');
+      }
+    });
+  }
+
   function loadTrack(index) {
     const track = CONFIG.favoriteSongs[index];
     if (bgAudio) {
@@ -143,6 +156,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     trackTitle.textContent = track.title;
     trackStatus.textContent = `${track.album} • Shanmathi's Fav`;
+    updateActiveLyricCard();
+  }
+
+  function playTrack(index) {
+    initAudioContext();
+    currentTrackIndex = index;
+    loadTrack(currentTrackIndex);
+
+    if (bgAudio && bgAudio.src) {
+      bgAudio.play().then(() => {
+        isAudioPlaying = true;
+        document.getElementById('playIcon').className = 'fa-solid fa-pause';
+        if (vinylDisc) vinylDisc.classList.add('spinning');
+        if (synthInterval) clearInterval(synthInterval);
+        updateActiveLyricCard();
+      }).catch(err => {
+        console.log("MP3 autoplay blocked or failed, using fallback synth:", err);
+        isAudioPlaying = true;
+        document.getElementById('playIcon').className = 'fa-solid fa-pause';
+        if (vinylDisc) vinylDisc.classList.add('spinning');
+        startSwiftieSynthMusic();
+        updateActiveLyricCard();
+      });
+    } else {
+      isAudioPlaying = true;
+      document.getElementById('playIcon').className = 'fa-solid fa-pause';
+      if (vinylDisc) vinylDisc.classList.add('spinning');
+      startSwiftieSynthMusic();
+      updateActiveLyricCard();
+    }
   }
 
   loadTrack(currentTrackIndex);
@@ -152,25 +195,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   prevTrackBtn.addEventListener('click', () => {
     currentTrackIndex = (currentTrackIndex - 1 + CONFIG.favoriteSongs.length) % CONFIG.favoriteSongs.length;
-    loadTrack(currentTrackIndex);
-    if (isAudioPlaying && bgAudio) {
-      bgAudio.play().catch(() => startSwiftieSynthMusic());
-    }
+    playTrack(currentTrackIndex);
   });
 
   nextTrackBtn.addEventListener('click', () => {
     currentTrackIndex = (currentTrackIndex + 1) % CONFIG.favoriteSongs.length;
-    loadTrack(currentTrackIndex);
-    if (isAudioPlaying && bgAudio) {
-      bgAudio.play().catch(() => startSwiftieSynthMusic());
-    }
+    playTrack(currentTrackIndex);
   });
 
   if (bgAudio) {
     bgAudio.addEventListener('ended', () => {
       currentTrackIndex = (currentTrackIndex + 1) % CONFIG.favoriteSongs.length;
-      loadTrack(currentTrackIndex);
-      bgAudio.play().catch(() => { });
+      playTrack(currentTrackIndex);
     });
   }
 
@@ -184,18 +220,21 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById('playIcon').className = 'fa-solid fa-pause';
           vinylDisc.classList.add('spinning');
           if (synthInterval) clearInterval(synthInterval);
+          updateActiveLyricCard();
         }).catch(err => {
           console.log("MP3 autoplay blocked or failed, using fallback synth:", err);
           isAudioPlaying = true;
           document.getElementById('playIcon').className = 'fa-solid fa-pause';
           vinylDisc.classList.add('spinning');
           startSwiftieSynthMusic();
+          updateActiveLyricCard();
         });
       } else {
         isAudioPlaying = true;
         document.getElementById('playIcon').className = 'fa-solid fa-pause';
         vinylDisc.classList.add('spinning');
         startSwiftieSynthMusic();
+        updateActiveLyricCard();
       }
     } else {
       isAudioPlaying = false;
@@ -203,6 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (synthInterval) clearInterval(synthInterval);
       document.getElementById('playIcon').className = 'fa-solid fa-play';
       vinylDisc.classList.remove('spinning');
+      updateActiveLyricCard();
     }
   }
 
@@ -279,6 +319,11 @@ document.addEventListener('DOMContentLoaded', () => {
       playTone(600, 'sine', 0.2);
     });
   }
+
+
+
+
+
 
 
   /* ------------------------------------------------------------------------
@@ -532,10 +577,19 @@ document.addEventListener('DOMContentLoaded', () => {
      9. SWIFTIE LYRIC CARDS FLIP GAME
      ------------------------------------------------------------------------ */
   const lyricCards = document.querySelectorAll('.lyric-card');
-  lyricCards.forEach(card => {
+  lyricCards.forEach((card, index) => {
+    if (!card.hasAttribute('data-track-index')) {
+      card.setAttribute('data-track-index', index);
+    }
     card.addEventListener('click', () => {
       card.classList.toggle('flipped');
       playTone(500, 'sine', 0.15);
+
+      const trackIdxAttr = card.getAttribute('data-track-index');
+      const trackIdx = trackIdxAttr !== null ? parseInt(trackIdxAttr, 10) : index;
+      if (!isNaN(trackIdx)) {
+        playTrack(trackIdx);
+      }
     });
   });
 
